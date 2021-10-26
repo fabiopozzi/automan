@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+"""
+compila soluzione e genera file per test automatico
+"""
+import os
+import subprocess
+
+def main():
+    curpath = os.getcwd()
+    sol_file = os.path.join(curpath, "soluzione.c")
+    out_file = os.path.join(curpath, "soluzione")
+    if not os.path.exists(sol_file):
+       print("file sorgente soluzione.c non esistente o non leggibile")
+       return
+
+    subprocess.run(["gcc", sol_file , "-o", out_file])
+
+
+if __name__ == '__main__':
+    main()
