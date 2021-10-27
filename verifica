@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""
+Verifica esercizio.
+Struttura cartelle:
+
+home
+  es1
+  es2
+  es3
+
+var
+  test
+    es1
+    es2
+    es3
+
+Il path deve essere configurabile
+"""
+import os
+import subprocess
+
+TEST_PATH = "/home/fabio/.local/test"
+
+def main():
+    curpath = os.getcwd()
+    sol_bin = os.path.join(curpath, 'soluzione')
+    out_file = "/tmp/out1.txt"
+
+    folder = os.path.basename(os.path.normpath(curpath))
+    test_folder = os.path.join(TEST_PATH, folder)
+    input_file = os.path.join(test_folder, "i1.txt")
+
+
+    if not os.path.exists(sol_bin):
+       print("file binario soluzione non esistente o non leggibile")
+       return -1
+
+    with open(out_file, 'w') as outfile:
+        infile = open(input_file, 'r')
+        subprocess.run(sol_bin, stdin=infile, stdout=outfile)
+        infile.close()
+        # TODO: verifica output programma
+
+if __name__ == '__main__':
+    main()
